@@ -1,0 +1,99 @@
+#!/bin/bash
+#
+# Vim is Charityware.  dart.vim syntax is Charityware.
+# 
+# (c) Copyright 2019 by Eugene Ciurana / pr3d4t0r.  Licensed under the
+# standard VIM LICENSE - Vim command :help uganda.txt for details.
+#
+# Project:  https://github.com/pr3d4t0r/dart-vim-syntax
+
+
+DART_SYNTAX_PROJECT="https://github.com/pr3d4t0r/dart-vim-syntax.git"
+# MacOS and Linux:
+TMP_DIR=$(mktemp -d 2> /dev/null || mktemp -d -t 'dart')
+USER_VIM="$HOME/.vim"
+
+
+function die {
+    if [[ -z "$2" ]]
+    then
+        exitCode=99
+    else
+        exitCode="$2"
+    fi
+
+    echo "$1"
+    exit "$exitCode"
+} # die
+
+
+function assertVimDirExists {
+    [[ ! -d "$HOME/.vim" ]] && die "$HOME/.vim directory missing; create it to continue" 1
+} # assertVimDirExists
+
+
+function assertGitInstalled {
+    [[ -z $(which git) ]] && die "git command not found on this system" 2
+} # assertGitInstalled
+
+
+function setup {
+    rm -Rf "$TMP_DIR"
+    mkdir -p "$TMP_DIR"
+} # setup
+
+
+function cloneProject {
+    git clone "$DART_SYNTAX_PROJECT" "$TMP_DIR"
+} # cloneProject
+
+
+function _cleanCopy {
+    file="$1"
+
+    sourceFile="$2/$file"
+    targetFile="$3/$file"
+
+    # Always overrides - no check?  Suggestions?
+    rm -f "$targetFile"
+
+    cp -vf "$sourceFile" "$targetFile"
+} # _cleanCopy
+
+
+function installSyntaxFiles {
+    vimSyntax="$USER_VIM/syntax"
+    vimFileDetection="$USER_VIM/ftdetect"
+    vimDocs="$USER_VIM/doc"
+    
+    originSyntax="$TMP_DIR/syntax"
+    originFileDetection="$TMP_DIR/ftdetect"
+    originDocs="$TMP_DIR/doc"
+
+    _cleanCopy dart.vim "$originSyntax" "$vimSyntax"
+    _cleanCopy dart.vim "$originFileDetection" "$vimFileDetection"
+    _cleanCopy dart.txt "$originDocs" "$vimDocs"
+} # installSyntaxFiles
+
+
+function notify {
+    printf "Dart Vim syntax files installed in $USER_VIM\n\n"
+
+    [[ -n $(which tree) ]] && tree -L 2 -I "autoload*|snippets*|include*|lib*|nerdtree*|*plugin*" -P "dart.*" "$USER_VIM"
+} # notify
+
+function cleanUp {
+    rm -Rf "$TMP_DIR"
+} # cleanUp
+
+
+# *** main ***
+
+assertVimDirExists
+assertGitInstalled
+setup
+cloneProject
+installSyntaxFiles
+notify
+cleanUp
+
