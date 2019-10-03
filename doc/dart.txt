@@ -1,0 +1,24 @@
+*dart.vim*	Dart Syntax File for Vim
+
+Contents:
+
+1. General information		|dart.vim|
+2. About					|dart-syntax-about|
+
+
+Dart						*dart.vim* *ft-dart-syntax*
+
+Dart is a lorem ipsum dolot sit hamet....
+
+Vim syntax highlights Dart statements, keywords, operators, types, comments,
+functions, and special values.
+
+
+*dart-syntax-about*
+
+Support:  Eugene Ciurana, dart.syntax AT cime.net, https://ciurana.eu or
+https://keybase.io/pr3d4t0r
+
+Main file:  https://github.com/pr3d4t0r/dart-vim-syntax
+Dart language:  https://dart.dev
+
