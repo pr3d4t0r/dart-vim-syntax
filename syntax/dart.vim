@@ -46,13 +46,13 @@ syn sync fromstart
 syn sync maxlines=100
 
 
+" TODO: based on javascript.vim - continue
 hi def link dartBoolean     Boolean
 hi def link dartBranch      Conditional
 hi def link dartConditional Conditional
 hi def link dartException   Exception
 hi def link dartIdentifier  Identifier
 hi def link dartLabel       Label
-hi def link dartNull        Keyword
 hi def link dartNull        Keyword
 hi def link dartOperator    Operator
 hi def link dartRepeat      Repeat
