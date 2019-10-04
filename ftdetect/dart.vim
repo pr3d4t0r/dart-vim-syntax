@@ -16,6 +16,7 @@
 " vim: set fileencoding=utf-8:
 
 au BufRead,BufNewfile *.dart setf dart
-au BufRead,BufNewfile *.nql  set dart
+au BufRead,BufNewfile *.dart set dart
+au BufRead,BufNewfile *.drt  set dart
 
 
