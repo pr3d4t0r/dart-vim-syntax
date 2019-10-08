@@ -49,10 +49,10 @@ function cloneProject {
 
 
 function _cleanCopy {
-    file="$1"
+    local file="$1"
 
-    sourceFile="$2/$file"
-    targetFile="$3/$file"
+    local sourceFile="$2/$file"
+    local targetFile="$3/$file"
 
     # Always overrides - no check?  Suggestions?
     rm -f "$targetFile"
@@ -62,17 +62,17 @@ function _cleanCopy {
 
 
 function installSyntaxFiles {
-    vimSyntax="$USER_VIM/syntax"
-    vimFileDetection="$USER_VIM/ftdetect"
-    vimDocs="$USER_VIM/doc"
+    local vimDocs="$USER_VIM/doc"
+    local vimFileDetection="$USER_VIM/ftdetect"
+    local vimSyntax="$USER_VIM/syntax"
     
-    originSyntax="$TMP_DIR/syntax"
-    originFileDetection="$TMP_DIR/ftdetect"
-    originDocs="$TMP_DIR/doc"
+    local originDocs="$TMP_DIR/doc"
+    local originFileDetection="$TMP_DIR/ftdetect"
+    local originSyntax="$TMP_DIR/syntax"
 
-    _cleanCopy dart.vim "$originSyntax" "$vimSyntax"
-    _cleanCopy dart.vim "$originFileDetection" "$vimFileDetection"
     _cleanCopy dart.txt "$originDocs" "$vimDocs"
+    _cleanCopy dart.vim "$originFileDetection" "$vimFileDetection"
+    _cleanCopy dart.vim "$originSyntax" "$vimSyntax"
 } # installSyntaxFiles
 
 
