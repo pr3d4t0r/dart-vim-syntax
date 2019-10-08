@@ -16,11 +16,11 @@ let s:cpo_save = &cpo
 set cpo&vim
 
 
-syn keyword dartCommentTodo     TODO FIXME XXX TBD contained
+syn keyword dartCommentTodo     contained TODO FIXME XXX TBD
 syn match   dartLineComment     "\/\/.*" contains=@Spell,dartCommentTodo
 syn match   dartCommentSkip     "^[ \t]*\*\($\|[ \t]\+\)"
 syn region  dartComment         start="/\*"  end="\*/" contains=@Spell,dartCommentTodo
-syn keyword dartReserved        assert class const extends final super
+syn keyword dartReserved        assert async class const extends final import super
 syn match   dartNumber          "-\=\<\d\+L\=\>\|0[xX][0-9a-fA-F]\+\>"
 
 " Reserved words
@@ -37,6 +37,12 @@ syn keyword dartStatement   return with
 syn keyword dartType        bool double enum int String StringBuffer void
 
 
+" syn region dartString       start=+"+ end=+"+ end=+$+ contains=dartSpecialChar,dartSpecialError,@Spell
+syn region dartString       start=+"+ end=+"+ end=+$+ contains=dartSpecialChar,dartSpecialError,@Spell
+syn match  dartSpecialChar  contained "\\\([4-9]\d\|[0-3]\d\d\|[\"\\'ntbrf]\|u\x\{4\}\)"
+syn match  dartSpecialError contained "\\."
+
+
 syn match dartBraces        "[{}\[\]]"
 syn match dartParens        "[()]"
 
@@ -48,19 +54,22 @@ syn sync maxlines=100
 syn sync ccomment dartComment
 
 
-" TODO: based on javascript.vim - continue
-hi def link dartBoolean     Boolean
-hi def link dartBranch      Conditional
-hi def link dartComment     Comment
-hi def link dartConditional Conditional
-hi def link dartException   Exception
-hi def link dartIdentifier  Identifier
-hi def link dartLabel       Label
-hi def link dartNull        Keyword
-hi def link dartOperator    Operator
-hi def link dartRepeat      Repeat
-hi def link dartReserved    Keyword
-hi def link dartStatement   Statement
+hi def link dartBoolean         Boolean
+hi def link dartBranch          Conditional
+hi def link dartComment         Comment
+hi def link dartConditional     Conditional
+hi def link dartException       Exception
+hi def link dartIdentifier      Identifier
+hi def link dartLabel           Label
+hi def link dartNull            Keyword
+hi def link dartOperator        Operator
+hi def link dartRepeat          Repeat
+hi def link dartReserved        Keyword
+hi def link dartSpecialChar     SpecialChar
+hi def link dartSpecialError    Error
+hi def link dartStatement       Statement
+hi def link dartString          String
+hi def link dartType            Type
 
 
 let b:current_syntax = "dart"
