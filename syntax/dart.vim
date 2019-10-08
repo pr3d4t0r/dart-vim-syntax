@@ -20,7 +20,7 @@ syn keyword dartCommentTodo     contained TODO FIXME XXX TBD
 syn match   dartLineComment     "\/\/.*" contains=@Spell,dartCommentTodo
 syn match   dartCommentSkip     "^[ \t]*\*\($\|[ \t]\+\)"
 syn region  dartComment         start="/\*"  end="\*/" contains=@Spell,dartCommentTodo
-syn keyword dartReserved        assert async class const extends final import super
+syn keyword dartReserved        assert async await class const export extends external final hide import implements interface library mixin on show super sync yield
 syn match   dartNumber          "-\=\<\d\+L\=\>\|0[xX][0-9a-fA-F]\+\>"
 
 " Reserved words
@@ -28,7 +28,7 @@ syn keyword dartBoolean     false true
 syn keyword dartBranch      break continue
 syn keyword dartConditional if else switch
 syn keyword dartException   catch finally rethrow throw try
-syn keyword dartIdentifier  dynamic this var
+syn keyword dartIdentifier  abstract covariant deferred dynamic factory Function operator part static this typedef var
 syn keyword dartLabel       case default
 syn keyword dartNull        null
 syn keyword dartOperator    is new
