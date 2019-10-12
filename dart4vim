@@ -9,9 +9,11 @@
 
 
 DART_SYNTAX_PROJECT="https://github.com/pr3d4t0r/dart-vim-syntax.git"
-# MacOS and Linux:
-TMP_DIR=$(mktemp -d 2> /dev/null || mktemp -d -t 'dart')
+TMP_DIR=$(mktemp -d 2> /dev/null || mktemp -d -t 'dart')  # MacOS and Linux:
 USER_VIM="$HOME/.vim"
+VIM_DOCS="$USER_VIM/doc"
+VIM_FILE_DETECTION="$USER_VIM/ftdetect"
+VIM_SYNTAX="$USER_VIM/syntax"
 
 
 function die {
@@ -62,17 +64,14 @@ function _cleanCopy {
 
 
 function installSyntaxFiles {
-    local vimDocs="$USER_VIM/doc"
-    local vimFileDetection="$USER_VIM/ftdetect"
-    local vimSyntax="$USER_VIM/syntax"
     
     local originDocs="$TMP_DIR/doc"
     local originFileDetection="$TMP_DIR/ftdetect"
     local originSyntax="$TMP_DIR/syntax"
 
-    _cleanCopy dart.txt "$originDocs" "$vimDocs"
-    _cleanCopy dart.vim "$originFileDetection" "$vimFileDetection"
-    _cleanCopy dart.vim "$originSyntax" "$vimSyntax"
+    _cleanCopy dart.txt "$originDocs" "$VIM_DOCS"
+    _cleanCopy dart.vim "$originFileDetection" "$VIM_FILE_DETECTION"
+    _cleanCopy dart.vim "$originSyntax" "$VIM_SYNTAX"
 } # installSyntaxFiles
 
 
@@ -87,13 +86,73 @@ function cleanUp {
 } # cleanUp
 
 
+function install {
+    assertGitInstalled
+    setup
+    cloneProject
+    installSyntaxFiles
+    notify
+    cleanUp
+} # install
+
+
+function remove {
+    local detectionFile="$VIM_FILE_DETECTION/dart.vim"
+    local docFile="$VIM_DOCS/dart.txt"
+    local syntaxFile="$VIM_SYNTAX/dart.vim"
+
+    if [[ -e "$syntaxFile" ]]
+    then
+        rm -f "$detectionFile" 2> /dev/null || die "$detectionFile exists but unable to delete it" 4
+        rm -f "$docFile" 2> /dev/null || die "$docFile exists but unable to delete it" 5
+        rm -f "$syntaxFile" 2> /dev/null || die "$syntaxFile exists but unable to delete it" 3
+
+        echo "Dart syntax files removed from $USER_VIM"
+    fi
+} # remove
+
+
+function helpUser {
+    cat <<"EOF"
+syntax:  dart4vim command
+
+    where command is one of:
+
+    install - fetch te latest stable version from GitHub and install
+    quick   - copy the Dart syntax files from this project and install
+    remove  - remove the Dart syntax files from $HOME/.vim
+
+EOF
+    exit 0
+} # helpUser
+
+
+function quickInstall {
+    _cleanCopy dart.txt ./doc "$VIM_DOCS"
+    _cleanCopy dart.vim ./ftdetect "$VIM_FILE_DETECTION"
+    _cleanCopy dart.vim ./syntax "$VIM_SYNTAX"
+
+    notify
+} # quickInstall
+
+
 # *** main ***
 
 assertVimDirExists
-assertGitInstalled
-setup
-cloneProject
-installSyntaxFiles
-notify
-cleanUp
+
+case "$1" in
+    "install")
+        install
+        ;;
+    "quick")
+        quickInstall
+        ;;
+    "remove")
+        remove
+        ;;
+    *)
+        helpUser
+        ;;
+esac
+exit 0
 

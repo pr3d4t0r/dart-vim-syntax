@@ -43,10 +43,12 @@ void countUpAsynchronously(int count) async {
 void main() {
   print('start main');
   
-  // Using futures:
-  // Future <String> future = createFutureCounter(502);
-  // print('adding a few Future API callbacks');
-  // future.then((value) => handleCompletion(value)).catchError((err) => handleError(err));
+  /*
+    Using futures:
+    Future <String> future = createFutureCounter(502);
+    print('adding a few Future API callbacks');
+    future.then((value) => handleCompletion(value)).catchError((err) => handleError(err));
+  */
   
   // Using async:
   countUpAsynchronously(1000);
