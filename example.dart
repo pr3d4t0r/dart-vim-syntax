@@ -22,6 +22,9 @@ String countUp(int count) {
 } // countUp
 
 
+# This is a test.
+
+
 Future <String> createFutureCounter(int count) {
   return new Future(() { return countUp(count) ;});
 } // createFutureCounter
@@ -48,6 +51,9 @@ void main() {
     Future <String> future = createFutureCounter(502);
     print('adding a few Future API callbacks');
     future.then((value) => handleCompletion(value)).catchError((err) => handleError(err));
+  */
+
+  /*
 
     TODO: SPECIAL HIGHLIGHTED COMMENT for later - syntax highlight test.
   */
@@ -56,6 +62,8 @@ void main() {
   countUpAsynchronously(1000);
   
   print('finish main');
+
+  // TODO in a single line comment - syntax highlight test.
 } // main
 
 

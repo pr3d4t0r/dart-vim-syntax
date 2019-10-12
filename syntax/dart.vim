@@ -1,8 +1,9 @@
 " Vim syntax file
+"
 " Language:     Dart
 " Maintainer:   Eugene 'pr3d4t0r' Ciurana <dart.syntax AT cime.net >
 " URL:          https://github.com/pr3d4t0r/dart-vim-syntax
-" Last Change:  20191002 - first release
+" Last Change:  See GitHub URL
 "
 " vim: set fileencoding=utf-8:
 
@@ -17,14 +18,13 @@ set cpo&vim
 
 
 syn keyword dartCommentTodo     contained TODO FIXME XXX TBD
-" syn match   dartLineComment     "\/\/.*" contains=@Spell,dartCommentTodo
 syn match   dartLineComment     "//.*" contains=dartTodo,@Spell
 syn match   dartCommentSkip     "^[ \t]*\*\($\|[ \t]\+\)"
 syn region  dartComment         start="/\*"  end="\*/" contains=@Spell,dartTodo
 syn keyword dartReserved        assert async await class const export extends external final hide import implements interface library mixin on show super sync yield
 syn match   dartNumber          "-\=\<\d\+L\=\>\|0[xX][0-9a-fA-F]\+\>"
 
-" Reserved words
+
 syn keyword dartBoolean     false true
 syn keyword dartBranch      break continue
 syn keyword dartConditional if else switch
@@ -39,10 +39,14 @@ syn keyword dartType        bool double enum int String StringBuffer void
 syn keyword dartTodo        contained TODO FIXME XXX
 
 
-" syn region dartString       start=+"+ end=+"+ end=+$+ contains=dartSpecialChar,dartSpecialError,@Spell
-syn region dartString       start=+"+ end=+"+ end=+$+ contains=dartSpecialChar,dartSpecialError,@Spell
 syn match  dartSpecialChar  contained "\\\([4-9]\d\|[0-3]\d\d\|[\"\\'ntbrf]\|u\x\{4\}\)"
+syn match  dartEscape       contained +\\[abfnrtv'"\\]+
+" syn match  dartGen          contained +\\$\{.*\\}+
 syn match  dartSpecialError contained "\\."
+syn region dartDQString     start=+"+ end=+"+ end=+$+ skip="\\\\\|\\\z1" contains=dartSpecialChar,dartSpecialError,@Spell
+
+" syn region dartSQString     start=+'+ end=+'+ end=+$+ skip="\\\\\|\\\z1" contains=dartEscape,dartGen,dartSpecialChar,dartSpecialError,@Spell
+syn region dartSQString     start=+'+ end=+'+ end=+$+ contains=dartEscape,dartGen,dartSpecialChar,dartSpecialError,@Spell
 
 
 syn match dartBraces        "[{}\[\]]"
@@ -53,24 +57,25 @@ syn sync fromstart
 syn sync maxlines=100
 
 
-syn sync ccomment dartComment
-
-
 hi def link dartBoolean         Boolean
 hi def link dartBranch          Conditional
 hi def link dartComment         Comment
 hi def link dartConditional     Conditional
+hi def link dartDQString        String
+hi def link dartEscape          Special
+hi def link dartGen             Special
 hi def link dartException       Exception
 hi def link dartIdentifier      Identifier
 hi def link dartLabel           Label
+hi def link dartLineComment     Comment
 hi def link dartNull            Keyword
 hi def link dartOperator        Operator
 hi def link dartRepeat          Repeat
 hi def link dartReserved        Keyword
+hi def link dartSQString        String
 hi def link dartSpecialChar     SpecialChar
 hi def link dartSpecialError    Error
 hi def link dartStatement       Statement
-hi def link dartString          String
 hi def link dartTodo            Todo
 hi def link dartType            Type
 
