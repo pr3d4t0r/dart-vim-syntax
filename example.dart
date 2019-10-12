@@ -48,6 +48,8 @@ void main() {
     Future <String> future = createFutureCounter(502);
     print('adding a few Future API callbacks');
     future.then((value) => handleCompletion(value)).catchError((err) => handleError(err));
+
+    TODO: SPECIAL HIGHLIGHTED COMMENT for later - syntax highlight test.
   */
   
   // Using async:

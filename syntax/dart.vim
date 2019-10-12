@@ -17,9 +17,10 @@ set cpo&vim
 
 
 syn keyword dartCommentTodo     contained TODO FIXME XXX TBD
-syn match   dartLineComment     "\/\/.*" contains=@Spell,dartCommentTodo
+" syn match   dartLineComment     "\/\/.*" contains=@Spell,dartCommentTodo
+syn match   dartLineComment     "//.*" contains=dartTodo,@Spell
 syn match   dartCommentSkip     "^[ \t]*\*\($\|[ \t]\+\)"
-syn region  dartComment         start="/\*"  end="\*/" contains=@Spell,dartCommentTodo
+syn region  dartComment         start="/\*"  end="\*/" contains=@Spell,dartTodo
 syn keyword dartReserved        assert async await class const export extends external final hide import implements interface library mixin on show super sync yield
 syn match   dartNumber          "-\=\<\d\+L\=\>\|0[xX][0-9a-fA-F]\+\>"
 
@@ -35,6 +36,7 @@ syn keyword dartOperator    is new
 syn keyword dartRepeat      for do in while
 syn keyword dartStatement   return with 
 syn keyword dartType        bool double enum int String StringBuffer void
+syn keyword dartTodo        contained TODO FIXME XXX
 
 
 " syn region dartString       start=+"+ end=+"+ end=+$+ contains=dartSpecialChar,dartSpecialError,@Spell
@@ -69,6 +71,7 @@ hi def link dartSpecialChar     SpecialChar
 hi def link dartSpecialError    Error
 hi def link dartStatement       Statement
 hi def link dartString          String
+hi def link dartTodo            Todo
 hi def link dartType            Type
 
 
