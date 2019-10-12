@@ -76,7 +76,7 @@ function installSyntaxFiles {
 
 
 function notify {
-    printf "Dart Vim syntax files installed in $USER_VIM\n\n"
+    printf "\nDart Vim syntax files INSTALLED in $USER_VIM\n\n"
 
     [[ -n $(which tree) ]] && tree -L 2 -I "autoload*|snippets*|include*|lib*|nerdtree*|*plugin*" -P "dart.*" "$USER_VIM"
 } # notify
@@ -103,11 +103,13 @@ function remove {
 
     if [[ -e "$syntaxFile" ]]
     then
+        notify
         rm -f "$detectionFile" 2> /dev/null || die "$detectionFile exists but unable to delete it" 4
         rm -f "$docFile" 2> /dev/null || die "$docFile exists but unable to delete it" 5
         rm -f "$syntaxFile" 2> /dev/null || die "$syntaxFile exists but unable to delete it" 3
 
-        echo "Dart syntax files removed from $USER_VIM"
+        printf "\nDart Vim syntax files REMOVED from $USER_VIM\n"
+        [[ -n $(which tree) ]] && tree -L 2 -I "autoload*|snippets*|include*|lib*|nerdtree*|*plugin*" -P "dart.*" "$USER_VIM"
     fi
 } # remove
 
