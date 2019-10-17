@@ -40,13 +40,17 @@ syn keyword dartTodo        contained TODO FIXME XXX
 
 
 syn match  dartSpecialChar  contained "\\\([4-9]\d\|[0-3]\d\d\|[\"\\'ntbrf]\|u\x\{4\}\)"
-syn match  dartEscape       contained +\\[abfnrtv'"\\]+
-" syn match  dartGen          contained +\\$\{.*\\}+
+syn match  dartEscape       contained "\\[abfnrtv'"\\]"
+syn match  dartStrInterpol  contained "\${[A-Z, 0-9, a-z, _]*\}"
 syn match  dartSpecialError contained "\\."
-syn region dartDQString     start=+"+ end=+"+ end=+$+ skip="\\\\\|\\\z1" contains=dartSpecialChar,dartSpecialError,@Spell
 
-" syn region dartSQString     start=+'+ end=+'+ end=+$+ skip="\\\\\|\\\z1" contains=dartEscape,dartGen,dartSpecialChar,dartSpecialError,@Spell
-syn region dartSQString     start=+'+ end=+'+ end=+$+ contains=dartEscape,dartGen,dartSpecialChar,dartSpecialError,@Spell
+" syn region dartSQString     start=+'+ end=+'+ end=+$+ skip="\\\\\|\\\z1" contains=dartEscape,dartStrInterpol,dartSpecialChar,dartSpecialError,@Spell
+" https://github.com/Houl/ExplainPattern-vim - install this for testing
+" https://regexr.com/
+" http://vimregex.com/
+" http://vimhelp.appspot.com/pattern.txt.html#pattern%2Etxt
+syn region dartSQString     start=+'+ end=+'+ end=+$+ contains=dartEscape,dartStrInterpol,dartSpecialChar,dartSpecialError,@Spell
+syn region dartDQString     start=+"+ end=+"+ end=+$+ contains=dartEscape,dartStrInterpol,dartSpecialChar,dartSpecialError,@Spell
 
 
 syn match dartBraces        "[{}\[\]]"
@@ -63,7 +67,7 @@ hi def link dartComment         Comment
 hi def link dartConditional     Conditional
 hi def link dartDQString        String
 hi def link dartEscape          Special
-hi def link dartGen             Special
+hi def link dartStrInterpol     Special
 hi def link dartException       Exception
 hi def link dartIdentifier      Identifier
 hi def link dartLabel           Label

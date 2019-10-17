@@ -129,7 +129,15 @@ EOF
 } # helpUser
 
 
+function assertSyntaxDevInPWD {
+    local currentDir=$(pwd)
+
+    [[ -e "$VIM_SYNTAX/dart.vim" ]] || die "$currentDir does not contain Dart syntax files" 6
+} # assertSyntaxDevInPWD
+
+
 function quickInstall {
+    assertSyntaxDevInPWD
     _cleanCopy dart.txt ./doc "$VIM_DOCS"
     _cleanCopy dart.vim ./ftdetect "$VIM_FILE_DETECTION"
     _cleanCopy dart.vim ./syntax "$VIM_SYNTAX"
