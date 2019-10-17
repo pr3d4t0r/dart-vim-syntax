@@ -33,6 +33,7 @@ Future <String> createFutureCounter(int count) {
 void countUpAsynchronously(int count) async {
   print("Async operation start");
   var value;
+  bool flag = false;
   
   try {
     value = await createFutureCounter(count);
