@@ -132,7 +132,7 @@ EOF
 function assertSyntaxDevInPWD {
     local currentDir=$(pwd)
 
-    [[ -e "$VIM_SYNTAX/dart.vim" ]] || die "$currentDir does not contain Dart syntax files" 6
+    [[ -e "$currentDir/syntax/dart.vim" ]] || die "$currentDir does not contain Dart syntax files" 6
 } # assertSyntaxDevInPWD
 
 

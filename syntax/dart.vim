@@ -46,15 +46,12 @@ syn keyword dartType        bool double enum int String StringBuffer void
 syn keyword dartTodo        contained TODO FIXME XXX
 
 
-syn match  dartSpecialChar  contained "\\\([4-9]\d\|[0-3]\d\d\|[\"\\'ntbrf]\|u\x\{4\}\)"
-" syn match  dartEscape       contained "\\[abfnrtv'"\\]"
-syn match  dartEscape       contained "\\n"
-syn match  dartStrInterpol  contained "\${[A-Z, 0-9, a-z, _]*\}"
+syn match  dartEscape       contained "\\\([4-9]\d\|[0-3]\d\d\|[\"\\'ntbrf]\|u\x\{4\}\)"
 syn match  dartSpecialError contained "\\."
+syn match  dartStrInterpol  contained "\${[A-Z, 0-9, a-z, _]*\}"
 
-syn region dartSQString     start=+'+ end=+'+ end=+$+ contains=dartEscape,dartStrInterpol,dartSpecialChar,dartSpecialError,@Spell
-syn region dartDQString     start=+"+ end=+"+ end=+$+ contains=dartEscape,dartStrInterpol,dartSpecialChar,dartSpecialError,@Spell
-
+syn region dartDQString     start=+"+ end=+"+ end=+$+ contains=dartEscape,dartStrInterpol,dartSpecialError,@Spell
+syn region dartSQString     start=+'+ end=+'+ end=+$+ contains=dartEscape,dartStrInterpol,dartSpecialError,@Spell
 
 syn match dartBraces        "[{}\[\]]"
 syn match dartParens        "[()]"
@@ -69,8 +66,7 @@ hi def link dartBranch          Conditional
 hi def link dartComment         Comment
 hi def link dartConditional     Conditional
 hi def link dartDQString        String
-" hi def link dartEscape          Special
-hi def link dartEscape          String
+hi def link dartEscape          SpecialChar
 hi def link dartStrInterpol     Special
 hi def link dartException       Exception
 hi def link dartIdentifier      Identifier
@@ -81,7 +77,6 @@ hi def link dartOperator        Operator
 hi def link dartRepeat          Repeat
 hi def link dartReserved        Keyword
 hi def link dartSQString        String
-hi def link dartSpecialChar     SpecialChar
 hi def link dartSpecialError    Error
 hi def link dartStatement       Statement
 hi def link dartTodo            Todo
