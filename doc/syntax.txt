@@ -1,2 +1,1 @@
-TODO TODO TODO - get this file from the master Vim repository!
-
+../../vim/runtime/doc/syntax.txt

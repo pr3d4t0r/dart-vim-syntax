@@ -1,18 +1,17 @@
 # dart.vim syntax file
 
 Dart is an object-oriented, typed, class defined, garbage collected language
-used for developing mobile, desktop, web, and back-end application.  Dart uses
+used for developing mobile, desktop, web, and back-end applications.  Dart uses
 a C-like syntax derived from C, Java, and JavaScript, with features adopted from
 Smalltalk, Python, Ruby, and others.
 
-More information about the language and its develoopment environment at the
-official [Dart Programming Language](https://dart.dev/) web site.
+More information about the language and its development environment at the
+official [Dart Programming Language](https://dart.dev/) website.
 
-This Vim syntax configuration highlighs Dart statements, reserved words,
-type definitions, storage classes, conditionals, loops, interpolated values,
-and comments.
-
-This syntax configuration doesn't support Flutter or any other Dart framework.
+dart.vim syntax detects and highlights Dart statements, reserved words,
+type declarations, storage classes, conditionals, loops, interpolated values,
+and comments.  There is no support idioms from Flutter or any other Dart
+framework.
 
 
 ## Requirements
@@ -38,7 +37,7 @@ using the `dart4vim` command, included with this distribution.
 End-user installation is only required until the Vim team approves merging this
 Dart syntax project into the main syntax files.  Dart syntax highlighting
 project maintainers also require manual file handling.  This process installs
-the  files in `$HOME/.vim` and Dart syntax highligting will be available on any 
+the  files in `$HOME/.vim` and Dart syntax highlight will be available on any 
 Vim / MacVim / gVim that the user runs.
 
 
@@ -46,7 +45,7 @@ Vim / MacVim / gVim that the user runs.
 
 1. Exit Vim, MacVim, gVim - all Vim instances associated with your user
 1. Execute from the console:<br>
-   `curl -s https://raw.githubusercontent.com/pr3d4t0r/dart-vim-syntax/master/dart4vim | sh -s`
+   `curl -s https://raw.githubusercontent.com/pr3d4t0r/dart-vim-syntax/master/dart4vim | sh -s install`
 1. Open `vim example.dart` to validate
 
 
@@ -58,7 +57,7 @@ Vim / MacVim / gVim that the user runs.
 1. Open `vim example.dart` to validate
 
 
-### Dart syntax highight developer installation
+### Dart syntax highlight developer installation
 
 1. Exit Vim, MacVim, gVim - all Vim instances associated with your user
 1. Clone the Dart syntax repository:<br>
@@ -101,5 +100,4 @@ Vim is Charityware.  dart.vim syntax is Charityware.
 
 &copy; Copyright 2019 by Eugene Ciurana / pr3d4t0r.  Licensed under the
 standard VIM LICENSE - Vim command `:help uganda.txt` for details.
-
 
