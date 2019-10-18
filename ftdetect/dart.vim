@@ -15,6 +15,12 @@
 "
 " vim: set fileencoding=utf-8:
 
+" Include the Vim code snippet in the $VIM_FORK_PAT/runtime/filetype.vim
+" file.
+
+" ---------------- Begin snippet ----------------
+" Dart
 au BufRead,BufNewfile *.dart setf dart
 au BufRead,BufNewfile *.drt  set dart
+" ---------------- End snippet ----------------
 

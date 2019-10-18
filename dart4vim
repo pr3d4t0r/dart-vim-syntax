@@ -13,6 +13,7 @@ TMP_DIR=$(mktemp -d 2> /dev/null || mktemp -d -t 'dart')  # MacOS and Linux:
 USER_VIM="$HOME/.vim"
 VIM_DOCS="$USER_VIM/doc"
 VIM_FILE_DETECTION="$USER_VIM/ftdetect"
+VIM_FORK_PATH="../vim"
 VIM_SYNTAX="$USER_VIM/syntax"
 
 
@@ -57,8 +58,7 @@ function _cleanCopy {
     local targetFile="$3/$file"
 
     # Always overrides - no check?  Suggestions?
-    rm -f "$targetFile"
-
+    rm -vf "$targetFile"
     cp -vf "$sourceFile" "$targetFile"
 } # _cleanCopy
 
@@ -121,6 +121,7 @@ syntax:  dart4vim command
     where command is one of:
 
     install - fetch te latest stable version from GitHub and install
+    publish - copy the Dart syntax files to ../vim/* target directories
     quick   - copy the Dart syntax files from this project and install
     remove  - remove the Dart syntax files from $HOME/.vim
 
@@ -146,6 +147,21 @@ function quickInstall {
 } # quickInstall
 
 
+function publish {
+    local forkedVimSyntaxDir="$VIM_FORK_PATH/runtime/syntax"
+    local forkedVimFileTypeFile="$VIM_FORK_PATH/runtime/filetype.vim"
+
+    assertSyntaxDevInPWD
+
+    [[ -d "$VIM_FORK_PATH" ]] || die "$VIM_FORK_PATH directory is not present - fork and check out Vim" 7
+    [[ -d "$forkedVimSyntaxDir" ]] || die "$forkedVimSyntaxDir directory is not present - do you have the right Vim fork?" 8
+    [[ -e "$forkedVimFileTypeFile" ]] || die "$forkedVimFileTypeFile file not found - is Vim forked?" 9
+
+    _cleanCopy "dart.vim" ./syntax "$forkedVimSyntaxDir"
+    echo "dart.vim published to forked Vim at $VIM_FORK_PATH"
+} # publish
+
+
 # *** main ***
 
 assertVimDirExists
@@ -153,6 +169,9 @@ assertVimDirExists
 case "$1" in
     "install")
         install
+        ;;
+    "publish")
+        publish
         ;;
     "quick")
         quickInstall
