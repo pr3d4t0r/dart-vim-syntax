@@ -2,15 +2,15 @@
 
 Dart is an object-oriented, typed, class defined, garbage collected language
 used for developing mobile, desktop, web, and back-end applications.  Dart uses
-a C-like syntax derived from C, Java, and JavaScript, with features adopted from
-Smalltalk, Python, Ruby, and others.
+a C-like syntax derived from C, Java, and JavaScript, with features adopted
+from Smalltalk, Python, Ruby, and others.
 
 More information about the language and its development environment at the
 official [Dart Programming Language](https://dart.dev/) website.
 
 dart.vim syntax detects and highlights Dart statements, reserved words,
 type declarations, storage classes, conditionals, loops, interpolated values,
-and comments.  There is no support idioms from Flutter or any other Dart
+and comments.  There is no support for idioms from Flutter or any other Dart
 framework.
 
 
