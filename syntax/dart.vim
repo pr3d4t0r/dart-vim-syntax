@@ -48,7 +48,7 @@ syn keyword dartTodo        contained TODO FIXME XXX
 
 syn match  dartEscape       contained "\\\([4-9]\d\|[0-3]\d\d\|[\"\\'ntbrf]\|u\x\{4\}\)"
 syn match  dartSpecialError contained "\\."
-syn match  dartStrInterpol  contained "\${[A-Z, 0-9, a-z, _]*\}"
+syn match  dartStrInterpol  contained "\${[\x, _]*\}"
 
 syn region dartDQString     start=+"+ end=+"+ end=+$+ contains=dartEscape,dartStrInterpol,dartSpecialError,@Spell
 syn region dartSQString     start=+'+ end=+'+ end=+$+ contains=dartEscape,dartStrInterpol,dartSpecialError,@Spell
@@ -67,7 +67,6 @@ hi def link dartComment         Comment
 hi def link dartConditional     Conditional
 hi def link dartDQString        String
 hi def link dartEscape          SpecialChar
-hi def link dartStrInterpol     Special
 hi def link dartException       Exception
 hi def link dartIdentifier      Identifier
 hi def link dartLabel           Label
@@ -79,6 +78,7 @@ hi def link dartReserved        Keyword
 hi def link dartSQString        String
 hi def link dartSpecialError    Error
 hi def link dartStatement       Statement
+hi def link dartStrInterpol     Special
 hi def link dartTodo            Todo
 hi def link dartType            Type
 
