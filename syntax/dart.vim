@@ -72,6 +72,7 @@ hi def link dartIdentifier      Identifier
 hi def link dartLabel           Label
 hi def link dartLineComment     Comment
 hi def link dartNull            Keyword
+hi def link dartNumber          Number
 hi def link dartOperator        Operator
 hi def link dartRepeat          Repeat
 hi def link dartReserved        Keyword
