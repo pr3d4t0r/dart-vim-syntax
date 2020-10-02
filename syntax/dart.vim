@@ -29,8 +29,11 @@ syn match   dartLineComment     "//.*" contains=dartTodo,@Spell
 syn match   dartCommentSkip     "^[ \t]*\*\($\|[ \t]\+\)"
 syn region  dartComment         start="/\*"  end="\*/" contains=@Spell,dartTodo
 syn keyword dartReserved        assert async await class const export extends external final hide import implements interface library mixin on show super sync yield
-syn match   dartNumber          "-\=\<\d\+L\=\>\|0[xX][0-9a-fA-F]\+\>"
 
+syn match   dartInteger         "-\=\<\%(\d\+\|0[xX]\x\+\)\>"            display
+syn match   dartDouble          "-\=\<\d\+\.\d\+\%([eE][-+]\=\d\+\)\=\>" display
+syn match   dartDouble          "-\=\<\d\+\%([eE][-+]\=\d\+\)\>"         display
+syn match   dartDouble          "-\=\.\d\+\%([eE][-+]\=\d\+\)\=\>"       display
 
 syn keyword dartBoolean     false true
 syn keyword dartBranch      break continue
@@ -65,10 +68,12 @@ hi def link dartBoolean         Boolean
 hi def link dartBranch          Conditional
 hi def link dartComment         Comment
 hi def link dartConditional     Conditional
+hi def link dartDouble          Float
 hi def link dartDQString        String
 hi def link dartEscape          SpecialChar
 hi def link dartException       Exception
 hi def link dartIdentifier      Identifier
+hi def link dartInteger         Number
 hi def link dartLabel           Label
 hi def link dartLineComment     Comment
 hi def link dartNull            Keyword
