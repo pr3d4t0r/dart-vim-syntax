@@ -46,12 +46,21 @@ syn keyword dartType        bool double enum int String StringBuffer void
 syn keyword dartTodo        contained TODO FIXME XXX
 
 
-syn match  dartEscape       contained "\\\([4-9]\d\|[0-3]\d\d\|[\"\\'ntbrf]\|u\x\{4\}\)"
-syn match  dartSpecialError contained "\\."
-syn match  dartStrInterpol  contained "\${[\x, _]*\}"
+syn match dartEscapeError   contained display "\\."
+syn match dartEscape        contained display "\\\([4-9]\d\|[0-3]\d\d\)"
+syn match dartEscape        contained display "\\\%([nrfbtv]\|x\x\{2}\|u\x\{4\}\|u{\x\{1,6}}\)"
+syn match dartSQEscape      contained display "\\'"
+syn match dartDQEscape      contained display '\\"'
 
-syn region dartDQString     start=+"+ end=+"+ end=+$+ contains=dartEscape,dartStrInterpol,dartSpecialError,@Spell
-syn region dartSQString     start=+'+ end=+'+ end=+$+ contains=dartEscape,dartStrInterpol,dartSpecialError,@Spell
+syn match  dartStrInterpol  contained display "\${[\x, _]*\}"
+syn match  dartStrInterpol  contained display "$\h\w\+"
+
+syn region dartRString      start=+r\z(['"]\)+     end=+\z1+ oneline contains=@Spell
+syn region dartSQString     start=+'+              end=+'+   end=+$+ contains=dartEscape,dartSQEscape,dartStrInterpol,dartEscapeError,@Spell
+syn region dartDQString     start=+"+              end=+"+   end=+$+ contains=dartEscape,dartDQEscape,dartStrInterpol,dartEscapeError,@Spell
+syn region dartTRString     start=+r\z('''\|"""\)+ end=+\z1+ contains=@Spell
+syn region dartTSQString    start=+'''+            end=+'''+ contains=dartEscape,dartSQEscape,dartStrInterpol,dartEscapeError,@Spell
+syn region dartTDQString    start=+"""+            end=+"""+ contains=dartEscape,dartDQEscape,dartStrInterpol,dartEscapeError,@Spell
 
 syn match dartBraces        "[{}\[\]]"
 syn match dartParens        "[()]"
@@ -65,8 +74,10 @@ hi def link dartBoolean         Boolean
 hi def link dartBranch          Conditional
 hi def link dartComment         Comment
 hi def link dartConditional     Conditional
-hi def link dartDQString        String
+hi def link dartDQEscape        dartEscape
+hi def link dartDQString        dartString
 hi def link dartEscape          SpecialChar
+hi def link dartEscapeError     Error
 hi def link dartException       Exception
 hi def link dartIdentifier      Identifier
 hi def link dartLabel           Label
@@ -75,10 +86,14 @@ hi def link dartNull            Keyword
 hi def link dartOperator        Operator
 hi def link dartRepeat          Repeat
 hi def link dartReserved        Keyword
-hi def link dartSQString        String
-hi def link dartSpecialError    Error
+hi def link dartSQEscape        dartEscape
+hi def link dartSQString        dartString
 hi def link dartStatement       Statement
+hi def link dartString          String
 hi def link dartStrInterpol     Special
+hi def link dartTSQString       dartString
+hi def link dartTDQString       dartString
+hi def link dartTRString        dartString
 hi def link dartTodo            Todo
 hi def link dartType            Type
 
