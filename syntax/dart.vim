@@ -24,6 +24,8 @@ let s:cpo_save = &cpo
 set cpo&vim
 
 
+syn match   dartSharpBang       "\%^#!.*" display
+
 syn keyword dartCommentTodo     contained TODO FIXME XXX TBD
 syn match   dartLineComment     "//.*" contains=dartTodo,@Spell
 syn match   dartCommentSkip     "^[ \t]*\*\($\|[ \t]\+\)"
@@ -75,6 +77,7 @@ hi def link dartNull            Keyword
 hi def link dartOperator        Operator
 hi def link dartRepeat          Repeat
 hi def link dartReserved        Keyword
+hi def link dartSharpBang       PreProc
 hi def link dartSQString        String
 hi def link dartSpecialError    Error
 hi def link dartStatement       Statement
