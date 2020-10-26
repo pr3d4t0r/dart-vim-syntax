@@ -28,6 +28,16 @@ syn keyword dartCommentTodo     contained TODO FIXME XXX TBD
 syn match   dartLineComment     "//.*" contains=dartTodo,@Spell
 syn match   dartCommentSkip     "^[ \t]*\*\($\|[ \t]\+\)"
 syn region  dartComment         start="/\*"  end="\*/" contains=@Spell,dartTodo
+
+syn match   dartDocumentation   "///.*" contains=dartTodo,@Spell
+
+if exists("g:dart_no_documentation_fold")
+  syn region dartDocumentation  start="/\*\*"                      end="\*/"                        contains=dartTodo,@Spell
+else
+  syn region dartDocumentation  start="/\*\*"                      end="\*/"                        contains=dartTodo,@Spell   fold
+  syn region dartDocFold        start="^\s*///.*\n\%(^\s*///\)\@=" end="^\s*///.*\n\%(^\s*///\)\@!" contains=dartDocumentation fold transparent keepend
+endif
+
 syn keyword dartReserved        assert async await class const export extends external final hide import implements interface library mixin on show super sync yield
 syn match   dartNumber          "-\=\<\d\+L\=\>\|0[xX][0-9a-fA-F]\+\>"
 
@@ -65,6 +75,7 @@ hi def link dartBoolean         Boolean
 hi def link dartBranch          Conditional
 hi def link dartComment         Comment
 hi def link dartConditional     Conditional
+hi def link dartDocumentation   Comment
 hi def link dartDQString        String
 hi def link dartEscape          SpecialChar
 hi def link dartException       Exception
