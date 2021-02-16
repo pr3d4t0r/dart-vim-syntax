@@ -31,6 +31,8 @@ syn region  dartComment         start="/\*"  end="\*/" contains=@Spell,dartTodo
 syn keyword dartReserved        assert async await class const export extends external final hide import implements interface library mixin on show super sync yield
 syn match   dartNumber          "-\=\<\d\+L\=\>\|0[xX][0-9a-fA-F]\+\>"
 
+syn match   dartSymbol          "#\%(\%(\h\|\$\)\%(\w\|\$\)*\.\)*\%(\h\|\$\)\%(\w\|\$\)*"
+syn match   dartSymbol          "#\%(<=\|>=\|==\|-\|+\|/\|\~/\|*\|%\||\|\^\|&\|>>>\|<<\|>>\|\[]=\|\[]\|\~\|<\|>\)"
 
 syn keyword dartBoolean     false true
 syn keyword dartBranch      break continue
@@ -79,6 +81,7 @@ hi def link dartSQString        String
 hi def link dartSpecialError    Error
 hi def link dartStatement       Statement
 hi def link dartStrInterpol     Special
+hi def link dartSymbol		Constant
 hi def link dartTodo            Todo
 hi def link dartType            Type
 
